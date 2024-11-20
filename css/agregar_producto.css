@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8f5e9; /* Fondo verde claro */
+    background-image: url(../Img/fondo-naturaleza.png); /* Fondo de naturaleza */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    width: 90%; /* Ajuste a 90% del ancho de la pantalla */
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: left;
+}
+
+h1 {
+    text-align: center;
+    color: #2e7d32; /* Verde oscuro */
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #4e5e50; /* Gris natural */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%; /* Los campos ocupan todo el ancho del contenedor */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #81c784; /* Verde claro para el borde */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f1f8e9; /* Fondo verde claro */
+    box-sizing: border-box; /* Asegura que padding no desborde */
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #388e3c; /* Verde bosque */
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+button[type="submit"]:hover {
+    background-color: #2e7d32; /* Verde oscuro al pasar el ratón */
+}
+
+.success, .error {
+    background-color: #81c784; /* Verde claro para mensajes de éxito */
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.error {
+    background-color: #e57373; /* Rojo suave para mensajes de error */
+}
+
+/* Estilo para el botón de Volver */
+.volver-container {
+    margin: 20px;
+    text-align: center; /* Centra el botón en el contenedor */
+}
+
+.btn-volver {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #388e3c; /* Azul original para el botón de volver */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-volver:hover {
+    background-color: #2980b9; /* Azul más oscuro al pasar el ratón */
+}

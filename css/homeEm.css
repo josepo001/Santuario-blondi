@@ -1,0 +1,133 @@
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.header {
+    background-color: #388E3C;
+    color: #fff;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    margin: 0 1rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user-info {
+    text-align: right;
+}
+
+/* Dashboard */
+.dashboard {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.dashboard h1 {
+    color: #388E3C;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Tarjetas */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #ffffff;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.card p.amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.ingresos .amount {
+    color: #388E3C;
+}
+
+.egresos .amount {
+    color: #c62828;
+}
+
+.utilidad .amount {
+    color: #1565C0;
+}
+
+/* Secciones de Recordatorios y Notificaciones */
+.section {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.section h2 {
+    font-size: 1.5rem;
+    color: #388E3C;
+    margin-bottom: 1rem;
+}
+
+.task-list, .notification-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-list li, .notification-list li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.task-list li i, .notification-list li i {
+    margin-right: 0.5rem;
+    color: #388E3C;
+}

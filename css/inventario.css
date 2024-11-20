@@ -1,0 +1,218 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8f5; /* Fondo suave */
+    background-image: url(../Img/fondo-home.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #333;
+}
+
+/* Header */
+.header {
+    background-color: #4CAF50; /* Verde natural */
+    color: #ffffff;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.user-info {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.user-info i {
+    margin-right: 0.5rem;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    margin: 0 1rem;
+}
+
+.nav-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* Formulario de productos */
+.form-producto {
+    width: 50%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.form-producto h2 {
+    text-align: center;
+    color: #388E3C;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.form-producto label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+.form-producto input[type="text"],
+.form-producto input[type="number"],
+.form-producto select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-producto input:focus,
+.form-producto select:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.form-producto button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-producto button[type="submit"]:hover {
+    background-color: #388E3C;
+}
+
+/* Tabla de inventario */
+.tabla-inventario-container {
+    width: 70%;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tabla-inventario-container h2 {
+    color: #388E3C;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.tabla-inventario {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-inventario thead {
+    background-color: #4CAF50;
+    color: #ffffff;
+}
+
+.tabla-inventario th, .tabla-inventario td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-inventario th {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.tabla-inventario tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-inventario tbody tr:hover {
+    background-color: #e8f5e9;
+}
+
+/* Estados de inventario */
+.estado-verde {
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 6px;
+}
+
+.estado-amarillo {
+    background-color: #ffc107;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 6px;
+}
+
+.estado-rojo {
+    background-color: #dc3545;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 6px;
+}
+
+/* Botón de agregar producto */
+.btn-agregar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #388E3C;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background-color: #2C3E50;
+}

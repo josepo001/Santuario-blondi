@@ -1,0 +1,156 @@
+/* Estilos generales para el cuerpo y el contenedor principal */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Título del formulario */
+.container h1 {
+    font-size: 1.8rem;
+    color: #2C3E50;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* Estilos para los mensajes de éxito y error */
+.success {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.error {
+    background-color: #dc3545;
+    color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* Estilos para los labels */
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para los inputs y el textarea */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Botones */
+.btn-submit,
+.btn-volver {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 1rem;
+}
+
+.btn-submit {
+    background-color: #28a745;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}
+
+.btn-volver {
+    background-color: #007bff;
+}
+
+.btn-volver:hover {
+    background-color: #0069d9;
+}
+/* Contenedor principal */
+.welcome-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+/* Título y subtítulo */
+.welcome-container h1 {
+    font-size: 1.8rem;
+    color: #2C3E50;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.welcome-container p {
+    color: #555555;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Botón de Donar */
+.welcome-container .btn-donar {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #28a745;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.welcome-container .btn-donar:hover {
+    background-color: #218838;
+}

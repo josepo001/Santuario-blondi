@@ -1,0 +1,101 @@
+/* Contenedor Principal */
+.container {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Título del Formulario */
+h1 {
+    color: #388E3C;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* Mensaje de Error */
+.error {
+    color: #c62828;
+    background-color: #FFCDD2;
+    padding: 0.8rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* Estilos para el Formulario */
+form label {
+    display: block;
+    margin-top: 1rem;
+    color: #2E7D32;
+    font-weight: bold;
+    text-align: left;
+}
+
+form input[type="number"],
+form input[type="date"],
+form select {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border: 1px solid #A5D6A7;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f4f8f4;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ajustar Espaciado entre Elementos */
+form input,
+form select {
+    margin-bottom: 1.2rem;
+}
+
+/* Botones Uniformes */
+.btn-submit,
+.btn-volver {
+    display: block;
+    width: calc(100% - 2px); /* Ajuste de ancho exacto */
+    padding: 0.8rem;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+/* Estilos para el Botón de Registrar */
+.btn-submit {
+    background-color: #388E3C;
+    color: #ffffff;
+}
+
+.btn-submit:hover {
+    background-color: #66bb6a;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el Botón de Volver */
+.btn-volver {
+    background-color: #a5d6a7;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.btn-volver:hover {
+    background-color: #81c784;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
