@@ -62,20 +62,16 @@ try {
                 <h2>Santuario Blondi</h2>
             </div>
             <nav class="nav-menu">
-            <ul>    
-                <li><a href="usuarios.php"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="estadisticas.php"><i class="fas fa-chart-line"></i> Estadísticas</a></li> <!-- Cambié el ícono a uno de estadísticas -->
-                <li><a href="perfilAdmin.php"><i class="fas fa-user-circle"></i> Mi Perfil</a></li> <!-- Cambié el ícono a uno de perfil más reconocible -->
-                <li><a href="reporte.php"><i class="fas fa-file-alt"></i> Reportes</a></li> <!-- Cambié el ícono a uno de archivo para reportes -->
-                <li><a href="../cerrar-sesion.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
-            </ul>
-            </nav>
-            <div class="user-info">
-                <i class="fas fa-user-circle" style="font-size: 24px; margin-right: 8px;"></i> <!-- Ícono de usuario -->
-                <span><?php echo htmlspecialchars($user['nombre'] . ' ' . $user['apellido']); ?></span>
-                <br>
-                <small><?php echo ucfirst($user['tipo_usuario']); ?></small>
-            </div>
+                <ul>
+                    <li><a href="usuarios.php"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="estadisticas.php"><i class="fas fa-chart-line"></i> Estadísticas</a></li>
+                    <li><a href="historial.php"><i class="fas fa-history"></i> Historial</a></li>
+                    <li><a href="perfilAdmin.php"><i class="fas fa-user-circle"></i> Mi Perfil</a></li>
+                    <li><a href="reporte.php"><i class="fas fa-file-alt"></i> Reportes</a></li>
+                    <li><a href="../cerrar-sesion.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                    
+                </ul>
+            </nav>            
         </div>
     </header>
     

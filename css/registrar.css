@@ -1,0 +1,108 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8fa; /* Fondo claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa */
+    color: #333; /* Texto oscuro */
+}
+
+/* Contenedor Principal */
+.container {
+    max-width: 400px; /* Ancho del formulario */
+    width: 100%;
+    position: relative;
+    background-color: white; /* Fondo blanco */
+    padding: 30px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Botón Volver */
+.volver {
+    position: absolute;
+    top: -50px; /* Colocar arriba del formulario */
+    left: 0;
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: background-color 0.3s;
+}
+
+.volver:hover {
+    background-color: #256b45; /* Verde más oscuro */
+}
+
+/* Encabezado */
+.header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2e8b57; /* Verde oscuro */
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaciado entre elementos */
+}
+
+form label {
+    font-weight: bold;
+    color: #2e8b57; /* Verde oscuro */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #2e8b57; /* Verde oscuro */
+    outline: none;
+}
+
+/* Botón de enviar */
+form button[type="submit"] {
+    padding: 10px 15px;
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #256b45; /* Verde más oscuro */
+}
+
+/* Mensaje de error */
+.error-message {
+    background-color: #ffdddd; /* Rojo claro */
+    color: #d8000c; /* Texto rojo */
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-left: 6px solid #d8000c;
+    border-radius: 5px;
+}

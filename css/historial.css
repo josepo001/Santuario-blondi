@@ -1,0 +1,132 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333; /* Color del texto general */
+}
+
+/* Encabezado */
+.header {
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white; /* Texto en blanco para contraste */
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+/* Menú de navegación */
+.nav-menu {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: white; /* Letras blancas para contraste */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.nav-menu ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #2e8b57; /* Verde oscuro para coherencia */
+}
+
+/* Formulario */
+form {
+    text-align: center;
+    margin: 20px 0;
+}
+
+form input, form button, form a {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form input {
+    color: #333; /* Texto oscuro */
+}
+
+form button {
+    background-color: #2e8b57;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #256b45;
+}
+
+form .btn-reset {
+    background-color: #ddd; /* Fondo claro para el botón de limpiar */
+    color: #333; /* Texto oscuro */
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+form .btn-reset:hover {
+    background-color: #bbb;
+    color: #111;
+}
+
+/* Tabla */
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 90%;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #2e8b57;
+    color: white; /* Texto blanco */
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    color: #333; /* Texto oscuro */
+}

@@ -63,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -73,50 +72,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/registrar.css"> <!-- Asegúrate de tener un CSS para esta página -->
 </head>
 <body>
-    <header class="header">
-        <h1>Registrar Nuevo Usuario</h1>
-    </header>
+    <div class="container">
+        <!-- Botón Volver -->
+        <a href="usuarios.php" class="volver">Volver</a>
 
-    <div class="position-absolute top-0 start-0 p-3">
-        <a href="usuarios.php" class="btn btn-secondary blanco">Volver</a>
+        <!-- Título -->
+        <header class="header">
+            <h1>Registrar Nuevo Usuario</h1>
+        </header>
+
+        <!-- Mostrar mensaje de error -->
+        <?php if ($mensaje): ?>
+            <div class="error-message">
+                <p><?php echo $mensaje; ?></p>
+            </div>
+        <?php endif; ?>
+
+        <!-- Formulario -->
+        <form method="POST" action="">
+            <div>
+                <label for="rut">RUT:</label>
+                <input type="text" name="rut" id="rut" required>
+            </div>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" required>
+            </div>
+            <div>
+                <label for="apellido">Apellido:</label>
+                <input type="text" name="apellido" id="apellido" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="tipo_usuario">Tipo de Usuario:</label>
+                <select name="tipo_usuario" id="tipo_usuario" required>
+                    <option value="admin">Admin</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="paciente">Paciente</option>
+                </select>
+            </div>
+            <div>
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit">Registrar Usuario</button>
+        </form>
     </div>
-
-    <?php if ($mensaje): ?>
-        <div class="error-message">
-            <p><?php echo $mensaje; ?></p>
-        </div>
-    <?php endif; ?>
-
-    <form method="POST" action="">
-        <div>
-            <label for="rut">RUT:</label>
-            <input type="text" name="rut" id="rut" required>
-        </div>
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" required>
-        </div>
-        <div>
-            <label for="apellido">Apellido:</label>
-            <input type="text" name="apellido" id="apellido" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <div>
-            <label for="tipo_usuario">Tipo de Usuario:</label>
-            <select name="tipo_usuario" id="tipo_usuario" required>
-                <option value="admin">Admin</option>
-                <option value="doctor">Doctor</option>
-                <option value="paciente">Paciente</option>
-            </select>
-        </div>
-        <div>
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <button type="submit">Registrar Usuario</button>
-    </form>
 </body>
 </html>

@@ -1,163 +1,166 @@
-/* General */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f8f5; /* Fondo en tono claro y suave */
-    background-image: url(../Img/fondo-home.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #333;
-}
-
-/* Header */
+/* Encabezado centrado */
 .header {
-    background-color: #388E3C; /* Verde natural */
-    color: #ffffff;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.header-content {
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white; /* Texto blanco */
+    padding: 10px 0; /* Espaciado vertical */
+    text-align: center; /* Centra el texto */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Alinea los elementos en columna */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
-.logo h2 {
+/* Logo dentro del encabezado */
+.header .logo h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Tamaño del texto del logo */
 }
 
-.user-info {
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-}
-
-.user-info i {
-    margin-right: 0.5rem;
+/* Menú de navegación centrado */
+.nav-menu {
+    margin-top: 10px; /* Espaciado entre logo y menú */
 }
 
 .nav-menu ul {
     list-style: none;
-    display: flex;
     padding: 0;
     margin: 0;
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 20px; /* Espaciado entre enlaces */
 }
 
-.nav-menu li {
-    margin: 0 1rem;
+.nav-menu ul li {
+    display: inline-block;
 }
 
-.nav-menu a {
-    color: #ffffff;
+.nav-menu ul li a {
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    color: white; /* Color blanco */
     font-weight: bold;
+    font-size: 1rem;
+    padding: 5px 10px; /* Espaciado interno */
     transition: background-color 0.3s;
-}
-
-.nav-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
 
-/* Notificaciones */
-#notificaciones-popup {
-    position: absolute;
-    top: 30px;
-    right: 0;
-    width: 200px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 100;
-    display: none;
+.nav-menu ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco semi-transparente al pasar el mouse */
+}
+
+/* Información del usuario en el encabezado */
+.user-info {
+    margin-top: 10px; /* Espaciado entre el menú y la información del usuario */
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.user-info i {
+    margin-right: 8px; /* Espaciado entre el icono y el texto */
+}
+
+
+/* Título */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #2e8b57; /* Verde oscuro */
+}
+
+/* Contenedor Principal */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Contenedor del perfil */
+.profile-container {
+    background-color: white;
+    padding: 30px;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
 }
 
-#notificaciones-popup p {
-    margin: 0;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-#notificaciones-popup p:last-child {
-    border-bottom: none;
+/* Mensaje */
+.mensaje {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde oscuro */
+    padding: 10px 15px;
+    border: 1px solid #c3e6cb; /* Verde claro */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 /* Formulario */
-.main-content {
-    background-color: #e9ecef;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 2rem auto;
-}
-
-.profile-container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
 .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaciado entre campos */
+}
+
+.profile-form .form-group {
     display: flex;
     flex-direction: column;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
+.profile-form .form-group label {
     font-weight: bold;
-    color: #495057;
-    margin-bottom: 0.5rem;
+    color: #2e8b57; /* Verde oscuro */
+    margin-bottom: 5px;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 0.85rem;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+.profile-form .form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
 }
 
-.form-group input:focus {
-    border-color: #4CAF50; /* Verde natural */
+.profile-form .form-group input:focus {
+    border-color: #2e8b57; /* Verde oscuro */
     outline: none;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
-/* Botón de actualizar */
+/* Botón de Actualizar */
 .btn-actualizar {
-    background-color: #4CAF50;
+    padding: 10px 15px;
+    background-color: #2e8b57; /* Verde oscuro */
     color: white;
     border: none;
-    padding: 0.85rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
+    border-radius: 5px;
     font-size: 1rem;
-    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 .btn-actualizar:hover {
-    background-color: #388E3C;
-    transform: scale(1.05);
+    background-color: #256b45; /* Verde más oscuro */
 }
 
-/* Mensaje de retroalimentación */
-.mensaje {
-    background-color: #dc3545; /* Fondo rojo para errores */
-    color: white;
-    padding: 0.75rem;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-weight: bold;
+/* Responsividad */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-container {
+        padding: 20px;
+    }
 }

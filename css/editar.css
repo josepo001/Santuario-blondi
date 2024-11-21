@@ -1,151 +1,116 @@
-/* Estilos del Header */
-.header {
-    background-color: #ffffff; /* Color del encabezado */
-    color: #008cff; /* Color del texto */
-    padding: 0.5rem; /* Reduce el espacio dentro del encabezado */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para el encabezado */
-}
-
-.header-content {
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8fa; /* Fondo claro */
+    margin: 0;
+    padding: 0;
+    color: #333; /* Texto oscuro */
     display: flex;
-    justify-content: space-between; /* Espacia entre el logo y la información del usuario */
-    align-items: center; /* Alinear verticalmente el contenido */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrado vertical */
 }
 
-.logo {
-    font-size: 1.2rem; /* Tamaño del texto del logo */
+/* Título */
+h1 {
+    text-align: center;
+    color: #2e8b57; /* Verde oscuro */
+    margin-bottom: 20px;
 }
 
-.user-info {
-    display: flex; /* Mantener como flex para alinear horizontalmente */
-    align-items: center; /* Alinear verticalmente al centro */
-    text-align: left; /* Alinear el texto a la izquierda */
-    flex-direction: column; /* Cambiar la dirección a columna para apilar los elementos */
-}
-
-.user-info i {
-    margin-bottom: 8px; /* Espacio entre el icono y el nombre */
-}
-
-.user-info span {
-    display: block; /* Asegurar que el nombre esté en su propia línea */
-}
-
-.user-info small {
-    display: block; /* Asegurar que el tipo de usuario esté en su propia línea */
-    font-size: 0.8rem; /* Ajustar el tamaño del texto si es necesario */
-}
-
-.nav-menu {
-    display: flex; /* Permite que los elementos de la barra de navegación estén en línea */
-    justify-content: center; /* Centra los elementos de navegación */
-    margin: 0; /* Eliminar márgenes */
-    align-items: center; /* Alinear verticalmente la barra de navegación */
-}
-
-.nav-menu ul {
-    list-style: none;
-    display: flex; /* Muestra los elementos en línea */
-    align-items: center; /* Alinear verticalmente los elementos de la lista */
-    padding: 0; /* Eliminar padding por defecto */
-    margin: 0; /* Eliminar margin por defecto */
-}
-
-.nav-menu li {
-    margin: 0 1rem; /* Espaciado horizontal entre los botones */
-}
-
-.nav-menu a {
-    color: #008cff; /* Color del texto de los enlaces */
-    text-decoration: none;
-    padding: 0.5rem 1rem; /* Espaciado dentro de los enlaces */
-    font-weight: bold; /* Negrita para los enlaces */
-    display: inline-block; /* Para aplicar padding correctamente */
-}
-
-/*Formulario*/
-/* Estilos generales del formulario */
+/* Formulario */
 .profile-form {
-    max-width: 600px; /* Ancho máximo del formulario */
-    margin: 0 auto; /* Centra el formulario en la página */
-    padding: 20px; /* Espaciado interno del formulario */
-    background: #fff; /* Fondo blanco */
-    border-radius: 8px; /* Esquinas redondeadas */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre grupos */
 }
 
-/* Estilo de las etiquetas */
-.profile-form label {
-    font-weight: bold; /* Texto en negrita */
-    margin-bottom: 5px; /* Espaciado inferior */
+/* Grupos del formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado entre etiqueta y campo */
 }
 
-/* Estilo de los campos de entrada */
-.form-control {
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Borde suave */
-    border-radius: 4px; /* Esquinas redondeadas */
-    transition: border 0.3s; /* Transición suave en el borde */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2e8b57; /* Verde oscuro */
+    margin: 0;
 }
 
-.form-control:focus {
-    border-color: #3498db; /* Color del borde en foco */
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Sombra en foco */
+/* Entradas */
+.profile-form input[type="text"],
+.profile-form input[type="email"],
+.profile-form input[type="password"],
+.profile-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
 }
 
-/* Estilo para el menú desplegable */
-.form-select {
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Borde suave */
-    border-radius: 4px; /* Esquinas redondeadas */
-    background: #f9f9f9; /* Fondo más claro */
-    transition: border 0.3s; /* Transición suave en el borde */
+.profile-form input:focus,
+.profile-form select:focus {
+    border-color: #2e8b57; /* Verde oscuro */
+    outline: none;
 }
 
-.form-select:focus {
-    border-color: #3498db; /* Color del borde en foco */
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Sombra en foco */
+/* Botones */
+.text-center {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre botones */
+    gap: 15px;
+    margin-top: 20px;
 }
 
-/* Estilo de los botones */
 .btn-actualizar {
-    background: #28a745; /* Color verde */
-    color: white; /* Texto blanco */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado */
-    border-radius: 4px; /* Esquinas redondeadas */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    transition: background 0.3s; /* Transición suave al cambiar el fondo */
+    padding: 10px 20px;
+    background-color: #2e8b57; /* Verde oscuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Ambos botones del mismo tamaño */
+    text-align: center;
 }
 
 .btn-actualizar:hover {
-    background: #218838; /* Color más oscuro al pasar el ratón */
+    background-color: #256b45; /* Verde más oscuro */
 }
 
-/* Estilo del botón cancelar */
 .btn-cancelar {
-    background: #e74c3c; /* Color rojo */
-    color: white; /* Texto blanco */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado */
-    border-radius: 4px; /* Esquinas redondeadas */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    transition: background 0.3s; /* Transición suave al cambiar el fondo */
-    margin-left: 10px; /* Espaciado a la izquierda */
-    text-decoration: none; /* Quitar el subrayado */
+    padding: 10px 20px;
+    background-color: #e57373; /* Rojo suave */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Ambos botones del mismo tamaño */
+    text-align: center;
 }
 
 .btn-cancelar:hover {
-    background: #c0392b; /* Color más oscuro al pasar el ratón */
+    background-color: #c62828; /* Rojo más oscuro */
 }
 
-
-/* Espaciado entre los grupos de campos */
-.form-group {
-    margin-bottom: 15px; /* Espaciado inferior entre campos */
-}
-
-/* Estilo del contenedor del formulario */
-.text-center {
-    text-align: center; /* Centra el texto */
+/* Ajustes del formulario */
+.profile-form div {
+    margin-bottom: 10px;
 }
