@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         // Obtener la conexión a la base de datos
         $db = getDB();
-        
+
         // Preparamos una consulta para encontrar al usuario según el RUT
         $stmt = $db->prepare("SELECT * FROM usuarios WHERE rut = ?");
         $stmt->bind_param("s", $rut); // Vinculamos el parámetro
@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $stmt->get_result();
         $user = $result->fetch_assoc(); // Obtenemos el resultado como un array asociativo
 
-        // Si el usuario existe y la contraseña es correcta (comparación sin encriptación)
-        if ($user && $contrasena === $user['contrasena']) {
+        // Si el usuario existe, verificamos la contraseña
+        if ($user && password_verify($contrasena, $user['contrasena'])) { // Cambiado a password_verify
             // Guardar la información relevante en la sesión
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_type'] = $user['tipo_usuario'];

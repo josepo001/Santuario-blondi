@@ -37,10 +37,13 @@ try {
     }
 
     // Obtener la suma de ingresos, egresos y utilidad del día actual
-    $fechaHoy = date("Y-m-d");
-
-    $stmt_transaccion = $db->prepare("SELECT SUM(ingresos) AS ingresos, SUM(egresos) AS egresos, SUM(utilidad) AS utilidad FROM transacciones_diarias WHERE fecha = ?");
-    $stmt_transaccion->bind_param("s", $fechaHoy);
+    $stmt_transaccion = $db->prepare("
+        SELECT SUM(IFNULL(ingresos, 0)) AS ingresos, 
+               SUM(IFNULL(egresos, 0)) AS egresos, 
+               SUM(IFNULL(utilidad, 0)) AS utilidad 
+        FROM transacciones_diarias 
+        WHERE fecha >= CURDATE() AND fecha < CURDATE() + INTERVAL 1 DAY
+    ");
     $stmt_transaccion->execute();
     $result_transaccion = $stmt_transaccion->get_result();
     $transaccionHoy = $result_transaccion->fetch_assoc();
@@ -55,6 +58,7 @@ try {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

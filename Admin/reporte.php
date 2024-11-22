@@ -105,6 +105,8 @@ try {
 
         <!-- Botón para descargar el reporte -->
         <a href="descargar_reporte.php?fecha=<?php echo urlencode($filtroFecha); ?>" class="btn-descargar">Descargar Reporte en PDF</a>
+        <a href="descargar_reporte_csv.php?fecha=<?php echo urlencode($filtroFecha); ?>" class="btn-descargar">Descargar Reporte en CSV</a>
+
     </div>
 </body>
 </html>

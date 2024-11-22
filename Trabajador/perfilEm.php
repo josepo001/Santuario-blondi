@@ -14,36 +14,51 @@ try {
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc(); // Obtener los datos del usuario
 
-    if ($user === null) {
-        // Manejo de error: usuario no encontrado
+    if (!$user) {
         $_SESSION['mensaje'] = "Usuario no encontrado.";
-        header('Location: index.php'); // Redirige a la página de inicio o a otra página
+        header('Location: index.php');
         exit;
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $nombre = $_POST['nombre'] ?? '';
-        $apellido = $_POST['apellido'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+        $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ''));
+        $apellido = htmlspecialchars(trim($_POST['apellido'] ?? ''));
+        $email = htmlspecialchars(trim($_POST['email'] ?? ''));
+        $password = trim($_POST['password'] ?? '');
+
+        if (empty($nombre) || empty($apellido) || empty($email)) {
+            $_SESSION['mensaje'] = "Todos los campos son obligatorios, excepto la contraseña.";
+            header('Location: perfilEm.php');
+            exit;
+        }
+
+       
 
         if ($password) {
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, password = ? WHERE id = ?");
-            $stmt->execute([$nombre, $apellido, $email, $password_hash, $_SESSION['user_id']]);
+            $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, contrasena = ? WHERE id = ?");
+            $stmt->bind_param("ssssi", $nombre, $apellido, $email, $password_hash, $_SESSION['user_id']);
         } else {
             $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ? WHERE id = ?");
-            $stmt->execute([$nombre, $apellido, $email, $_SESSION['user_id']]);
+            $stmt->bind_param("sssi", $nombre, $apellido, $email, $_SESSION['user_id']);
         }
 
-        $_SESSION['mensaje'] = "Perfil actualizado correctamente";
-        header('Location: perfilAdmin.php');
+        if ($stmt->execute()) {
+            $_SESSION['mensaje'] = "Perfil actualizado correctamente.";
+        } else {
+            $_SESSION['mensaje'] = "Error al actualizar el perfil.";
+        }
+
+        header('Location: perfilEm.php');
         exit;
     }
-} catch(PDOException $e) {
-    die("Error: " . $e->getMessage());
+} catch (Exception $e) {
+    $_SESSION['mensaje'] = "Error en el sistema: " . htmlspecialchars($e->getMessage());
+    header('Location: index.php');
+    exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

@@ -14,8 +14,8 @@ try {
     $db = getDB(); // Obtener conexión a la base de datos
 
     // Verificar si se ha pasado un ID por la URL
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $id = intval($_GET['id']); // Asegurarse de que el ID sea un número entero
 
         // Obtener información del usuario a editar
         $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = ?");
@@ -30,7 +30,7 @@ try {
             exit; // Detener ejecución si el usuario no existe
         }
     } else {
-        echo "ID de usuario no especificado.";
+        echo "ID de usuario no especificado o inválido.";
         exit; // Detener ejecución si no se especifica el ID
     }
 } catch (Exception $e) {
@@ -38,12 +38,12 @@ try {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" href="../css/editar.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -57,30 +57,30 @@ try {
     <input type="hidden" value="<?php echo htmlspecialchars($user['id']); ?>" name="txtID">        
 
     <div class="form-group">
-        <label for="inputNombre"><b>NOMBRE</b></label>
+        <label for="inputNombre"><b>Nombre</b></label>
         <input id="inputNombre" class="form-control" type="text" value="<?php echo htmlspecialchars($user['nombre']); ?>" name="txtNombre" required>
     </div>
 
     <div class="form-group">
-        <label for="inputApellido"><b>APELLIDO</b></label>
+        <label for="inputApellido"><b>Apellido</b></label>
         <input id="inputApellido" class="form-control" type="text" value="<?php echo htmlspecialchars($user['apellido']); ?>" name="txtApellido" required>
     </div>
     
     <div class="form-group">
-        <label for="inputEmail"><b>EMAIL</b></label>
+        <label for="inputEmail"><b>Email</b></label>
         <input id="inputEmail" class="form-control" type="email" value="<?php echo htmlspecialchars($user['email']); ?>" name="txtEmail" required>
     </div>
 
     <div class="form-group">
-        <label for="inputPassword"><b>CONTRASEÑA</b></label>
-        <input id="inputPassword" class="form-control" type="password" name="txtPassword" placeholder="dejar vacío si no desea cambiar">
+        <label for="inputPassword"><b>Contraseña</b></label>
+        <input id="inputPassword" class="form-control" type="password" name="txtPassword" placeholder="Dejar vacío si no desea cambiar">
     </div>
     
     <div class="form-group">
-        <label for="tipoUsuario"><b>TIPO DE USUARIO</b></label>
+        <label for="tipoUsuario"><b>Tipo de Usuario</b></label>
         <select name="txtTipoUsuario" id="tipoUsuario">
             <option value="admin" <?php echo $user['tipo_usuario'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
-            <option value="doctor" <?php echo $user['tipo_usuario'] == 'empleado' ? 'selected' : ''; ?>>Empleado</option>
+            <option value="empleado" <?php echo $user['tipo_usuario'] == 'empleado' ? 'selected' : ''; ?>>Empleado</option>
         </select>
     </div>
 

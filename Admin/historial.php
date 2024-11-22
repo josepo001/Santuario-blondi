@@ -1,37 +1,50 @@
 <?php
-// Conexión a la base de datos
-include 'DB.php'; // Asegúrate de que este archivo conecta correctamente a la DB
+// Incluir el archivo de conexión a la base de datos
+include 'DB.php';
 $conn = getDB();
 
-// Variables para filtros
+// Variables para los filtros
 $where = [];
+$where[] = "tarjeta_id IS NOT NULL"; // Mostrar solo registros con tarjeta asignada
 
-// Mostrar solo registros con tarjeta_id asignado
-$where[] = "tarjeta_id IS NOT NULL";
-
-// Filtrar por tarjeta
+// Filtros dinámicos
 if (isset($_GET['tarjeta_id']) && !empty($_GET['tarjeta_id'])) {
     $tarjeta_id = intval($_GET['tarjeta_id']);
     $where[] = "tarjeta_id = $tarjeta_id";
 }
 
-// Filtrar por rango de fechas
 if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
     $where[] = "fecha BETWEEN '$desde' AND '$hasta'";
 }
 
-// Generar condición WHERE si hay filtros
+if (!empty($_GET['tipo_compra'])) {
+    $tipo_compra = $_GET['tipo_compra'];
+    $where[] = "tipo_compra = '$tipo_compra'";
+}
+
+if (!empty($_GET['monto_min']) && !empty($_GET['monto_max'])) {
+    $monto_min = floatval($_GET['monto_min']);
+    $monto_max = floatval($_GET['monto_max']);
+    $where[] = "egresos BETWEEN $monto_min AND $monto_max";
+}
+
+// Generar consulta SQL
 $where_sql = !empty($where) ? "WHERE " . implode(" AND ", $where) : "";
-
-// Consultar transacciones
-$query = "SELECT fecha, descripcion, ingresos, egresos, utilidad, tarjeta_id FROM transacciones_diarias $where_sql ORDER BY fecha ASC";
+$query = "SELECT fecha, descripcion, egresos, tarjeta_id FROM transacciones_diarias $where_sql ORDER BY fecha ASC";
 $result = $conn->query($query);
-?>
 
+// Guardar los resultados
+$transacciones = [];
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $transacciones[] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +59,6 @@ $result = $conn->query($query);
             <div class="logo">
                 <h2>Santuario Blondi</h2>
             </div>
-
             <nav class="nav-menu">
                 <ul>
                     <li><a href="usuarios.php"><i class="fas fa-home"></i> Inicio</a></li>
@@ -55,53 +67,57 @@ $result = $conn->query($query);
                     <li><a href="perfilAdmin.php"><i class="fas fa-user-circle"></i> Mi Perfil</a></li>
                     <li><a href="reporte.php"><i class="fas fa-file-alt"></i> Reportes</a></li>
                     <li><a href="../cerrar-sesion.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
-                    
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Rest of the page content -->
     <h1>Historial de Transacciones</h1>
 
-    <!-- Formulario de filtros -->
+    <!-- Formulario de Filtros -->
     <form method="GET" action="">
         <label for="tarjeta_id">Tarjeta ID:</label>
-        <input type="number" name="tarjeta_id" id="tarjeta_id" value="<?= isset($_GET['tarjeta_id']) ? $_GET['tarjeta_id'] : '' ?>">
+        <input type="number" id="tarjeta_id" name="tarjeta_id" value="<?= htmlspecialchars($_GET['tarjeta_id'] ?? '') ?>">
 
         <label for="desde">Desde:</label>
-        <input type="date" name="desde" id="desde" value="<?= isset($_GET['desde']) ? $_GET['desde'] : '' ?>">
+        <input type="date" id="desde" name="desde" value="<?= htmlspecialchars($_GET['desde'] ?? '') ?>">
 
         <label for="hasta">Hasta:</label>
-        <input type="date" name="hasta" id="hasta" value="<?= isset($_GET['hasta']) ? $_GET['hasta'] : '' ?>">
+        <input type="date" id="hasta" name="hasta" value="<?= htmlspecialchars($_GET['hasta'] ?? '') ?>">
+
+        <label for="monto_min">Monto Mínimo:</label>
+        <input type="number" id="monto_min" name="monto_min" step="0.01" value="<?= htmlspecialchars($_GET['monto_min'] ?? '') ?>">
+
+        <label for="monto_max">Monto Máximo:</label>
+        <input type="number" id="monto_max" name="monto_max" step="0.01" value="<?= htmlspecialchars($_GET['monto_max'] ?? '') ?>">
 
         <button type="submit">Aplicar Filtros</button>
         <a href="historial.php" class="btn-reset">Limpiar Filtros</a>
     </form>
 
-    <!-- Tabla de resultados -->
+    <!-- Tabla de Resultados -->
     <table>
         <thead>
             <tr>
                 <th>Fecha</th>
                 <th>Descripción</th>
-                <th>Egresos</th>
+                <th>Monto</th>
                 <th>Tarjeta ID</th>
             </tr>
         </thead>
         <tbody>
-            <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
+            <?php if (!empty($transacciones)): ?>
+                <?php foreach ($transacciones as $row): ?>
                     <tr>
                         <td><?= htmlspecialchars($row['fecha']) ?></td>
                         <td><?= htmlspecialchars($row['descripcion']) ?></td>
                         <td>$<?= number_format($row['egresos'], 2) ?></td>
                         <td><?= htmlspecialchars($row['tarjeta_id']) ?></td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6">No se encontraron transacciones.</td>
+                    <td colspan="5">No se encontraron transacciones.</td>
                 </tr>
             <?php endif; ?>
         </tbody>

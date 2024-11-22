@@ -24,22 +24,48 @@ try {
         $user = $result_user->fetch_assoc();
     } else {
         // Redirigir al login si no hay sesión
-        header('Location: login.php');
+        header('Location: index.php');
         exit;
     }
 
-    // Obtener datos diarios
-    $stmt_diario = $db->prepare("SELECT ingresos, egresos, utilidad FROM transacciones_diarias WHERE fecha = CURDATE()");
+    // Obtener datos diarios acumulados (suma de ingresos, egresos y utilidad del día actual)
+    $stmt_diario = $db->prepare("
+        SELECT 
+            SUM(ingresos) AS ingresos, 
+            SUM(egresos) AS egresos, 
+            SUM(utilidad) AS utilidad 
+        FROM transacciones_diarias 
+        WHERE fecha = CURDATE()
+    ");
     $stmt_diario->execute();
     $datosDiarios = $stmt_diario->get_result()->fetch_assoc();
 
     // Obtener datos mensuales del año actual
-    $stmt_mensual = $db->prepare("SELECT MONTH(fecha) AS mes, SUM(ingresos) AS total_ingresos, SUM(egresos) AS total_egresos, SUM(utilidad) AS total_utilidad FROM transacciones_diarias WHERE YEAR(fecha) = YEAR(CURDATE()) GROUP BY MONTH(fecha) ORDER BY mes");
+    $stmt_mensual = $db->prepare("
+        SELECT 
+            MONTH(fecha) AS mes, 
+            SUM(ingresos) AS total_ingresos, 
+            SUM(egresos) AS total_egresos, 
+            SUM(utilidad) AS total_utilidad 
+        FROM transacciones_diarias 
+        WHERE YEAR(fecha) = YEAR(CURDATE()) 
+        GROUP BY MONTH(fecha) 
+        ORDER BY mes
+    ");
     $stmt_mensual->execute();
     $datosMensuales = $stmt_mensual->get_result()->fetch_all(MYSQLI_ASSOC);
 
     // Obtener datos anuales
-    $stmt_anual = $db->prepare("SELECT YEAR(fecha) AS anio, SUM(ingresos) AS total_ingresos, SUM(egresos) AS total_egresos, SUM(utilidad) AS total_utilidad FROM transacciones_diarias GROUP BY YEAR(fecha) ORDER BY anio DESC");
+    $stmt_anual = $db->prepare("
+        SELECT 
+            YEAR(fecha) AS anio, 
+            SUM(ingresos) AS total_ingresos, 
+            SUM(egresos) AS total_egresos, 
+            SUM(utilidad) AS total_utilidad 
+        FROM transacciones_diarias 
+        GROUP BY YEAR(fecha) 
+        ORDER BY anio DESC
+    ");
     $stmt_anual->execute();
     $datosAnuales = $stmt_anual->get_result()->fetch_all(MYSQLI_ASSOC);
 
@@ -48,6 +74,7 @@ try {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -85,98 +112,28 @@ try {
         <h1>Estadísticas Financieras</h1>
 
         <!-- Resumen Diario -->
-        <h2>Resumen Diario (Hoy)</h2>
+        <h3>Resumen Diario (Hoy)</h3>
         <p>Ingresos: $<?php echo number_format($datosDiarios['ingresos'] ?? 0, 0); ?></p>
         <p>Egresos: $<?php echo number_format($datosDiarios['egresos'] ?? 0, 0); ?></p>
         <p>Utilidad: $<?php echo number_format($datosDiarios['utilidad'] ?? 0, 0); ?></p>
 
         <!-- Gráfico Mensual -->
-        <h2>Resumen Mensual (Año Actual)</h2>
-        <canvas id="graficoMensual"></canvas>
+        <h3>Resumen Mensual (Año Actual)</h3>
+        <canvas id="graficoMensual" width="800" height="400"></canvas>
 
         <!-- Gráfico Anual -->
-        <h2>Resumen Anual</h2>
-        <canvas id="graficoAnual"></canvas>
+        <h3>Resumen Anual</h3>
+        <canvas id="graficoAnual" width="800" height="400"></canvas>
     </div>
 
+    <!-- Cargar datos para el script -->
     <script>
-        // Datos Mensuales para el Gráfico
-        const labelsMensuales = <?php echo json_encode(array_column($datosMensuales, 'mes')); ?>;
-        const ingresosMensuales = <?php echo json_encode(array_column($datosMensuales, 'total_ingresos')); ?>;
-        const egresosMensuales = <?php echo json_encode(array_column($datosMensuales, 'total_egresos')); ?>;
-        const utilidadMensual = <?php echo json_encode(array_column($datosMensuales, 'total_utilidad')); ?>;
-
-        // Datos Anuales para el Gráfico
-        const labelsAnuales = <?php echo json_encode(array_column($datosAnuales, 'anio')); ?>;
-        const ingresosAnuales = <?php echo json_encode(array_column($datosAnuales, 'total_ingresos')); ?>;
-        const egresosAnuales = <?php echo json_encode(array_column($datosAnuales, 'total_egresos')); ?>;
-        const utilidadAnual = <?php echo json_encode(array_column($datosAnuales, 'total_utilidad')); ?>;
-
-        // Gráfico Mensual
-        const ctxMensual = document.getElementById('graficoMensual').getContext('2d');
-        const graficoMensual = new Chart(ctxMensual, {
-            type: 'bar',
-            data: {
-                labels: labelsMensuales,
-                datasets: [
-                    {
-                        label: 'Ingresos',
-                        data: ingresosMensuales,
-                        backgroundColor: 'rgba(56, 142, 60, 0.7)',
-                    },
-                    {
-                        label: 'Egresos',
-                        data: egresosMensuales,
-                        backgroundColor: 'rgba(198, 40, 40, 0.7)',
-                    },
-                    {
-                        label: 'Utilidad',
-                        data: utilidadMensual,
-                        backgroundColor: 'rgba(21, 101, 192, 0.7)',
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    x: { title: { display: true, text: 'Mes' } },
-                    y: { title: { display: true, text: 'Monto ($)' } }
-                }
-            }
-        });
-
-        // Gráfico Anual - Barra Horizontal
-        const ctxAnual = document.getElementById('graficoAnual').getContext('2d');
-        const graficoAnual = new Chart(ctxAnual, {
-            type: 'bar',
-            data: {
-                labels: labelsAnuales,
-                datasets: [
-                    {
-                        label: 'Ingresos',
-                        data: ingresosAnuales,
-                        backgroundColor: 'rgba(56, 142, 60, 0.7)',
-                    },
-                    {
-                        label: 'Egresos',
-                        data: egresosAnuales,
-                        backgroundColor: 'rgba(198, 40, 40, 0.7)',
-                    },
-                    {
-                        label: 'Utilidad',
-                        data: utilidadAnual,
-                        backgroundColor: 'rgba(21, 101, 192, 0.7)',
-                    }
-                ]
-            },
-            options: {
-                indexAxis: 'y', // Cambia el gráfico a barras horizontales
-                scales: {
-                    x: { title: { display: true, text: 'Monto ($)' } },
-                    y: { title: { display: true, text: 'Año' } }
-                }
-            }
-        });
-
+        const datosEstadisticas = {
+            datosMensuales: <?php echo json_encode($datosMensuales); ?>,
+            datosAnuales: <?php echo json_encode($datosAnuales); ?>
+        };
     </script>
+
+    <script src="js/estadisticas.js"></script>
 </body>
 </html>

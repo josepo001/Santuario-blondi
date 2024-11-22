@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once 'DB.php'; // Asegúrate de que la ruta sea correcta
 
+// Verificar si el usuario está logueado
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit;
@@ -16,12 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener conexión a la base de datos
     $db = getDB();
 
-    // Capturar los datos del formulario
-    $rut = $_POST['rut'];
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $email = $_POST['email'];
-    $tipo_usuario = $_POST['tipo_usuario'];
+    // Capturar y sanitizar los datos del formulario
+    $rut = htmlspecialchars($_POST['rut']);
+    $nombre = htmlspecialchars($_POST['nombre']);
+    $apellido = htmlspecialchars($_POST['apellido']);
+    $email = htmlspecialchars($_POST['email']);
+    $tipo_usuario = htmlspecialchars($_POST['tipo_usuario']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encriptar la contraseña
 
     try {
@@ -50,14 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insertar nuevo usuario
-        $stmt = $db->prepare("INSERT INTO usuarios (rut, nombre, apellido, email, tipo_usuario, password) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO usuarios (rut, nombre, apellido, email, tipo_usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $rut, $nombre, $apellido, $email, $tipo_usuario, $password);
         $stmt->execute();
 
         // Redirigir con mensaje de éxito
         header('Location: usuarios.php?success=Usuario registrado correctamente');
         exit;
-
     } catch (Exception $e) {
         $mensaje = "Error al registrar usuario: " . htmlspecialchars($e->getMessage());
     }
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
-    <link rel="stylesheet" href="../css/registrar.css"> <!-- Asegúrate de tener un CSS para esta página -->
+    <link rel="stylesheet" href="../css/registrar.css"> <!-- Asegúrate de tener un archivo CSS -->
 </head>
 <body>
     <div class="container">
@@ -110,8 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="tipo_usuario">Tipo de Usuario:</label>
                 <select name="tipo_usuario" id="tipo_usuario" required>
                     <option value="admin">Admin</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="paciente">Paciente</option>
+                    <option value="empleado">Empleado</option>
                 </select>
             </div>
             <div>

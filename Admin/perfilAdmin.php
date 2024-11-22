@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../Admin/DB.php';
+require_once '../Admin/DB.php'; // Asegúrate de que esta función conecte correctamente a la base de datos
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
@@ -9,6 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 
 try {
     $db = getDB(); // Obtener conexión a la base de datos
+
+    // Verificar que el usuario esté en sesión
     $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = ?");
     $stmt->bind_param("i", $_SESSION['user_id']); // Usando bind_param para mayor seguridad
     $stmt->execute();
@@ -17,33 +19,54 @@ try {
     if ($user === null) {
         // Manejo de error: usuario no encontrado
         $_SESSION['mensaje'] = "Usuario no encontrado.";
-        header('Location: index.php'); // Redirige a la página de inicio o a otra página
+        header('Location: index.php'); // Redirige a la página de inicio
         exit;
     }
 
+    // Si el formulario se envió con método POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $nombre = $_POST['nombre'] ?? '';
-        $apellido = $_POST['apellido'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+        $nombre = trim($_POST['nombre'] ?? '');
+        $apellido = trim($_POST['apellido'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $password = trim($_POST['password'] ?? '');
 
-        if ($password) {
-            $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, password = ? WHERE id = ?");
-            $stmt->execute([$nombre, $apellido, $email, $password_hash, $_SESSION['user_id']]);
-        } else {
-            $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ? WHERE id = ?");
-            $stmt->execute([$nombre, $apellido, $email, $_SESSION['user_id']]);
+        // Validación básica
+        if (empty($nombre) || empty($apellido) || empty($email)) {
+            $_SESSION['mensaje'] = "Todos los campos son obligatorios, excepto la contraseña.";
+            header('Location: perfilAdmin.php');
+            exit;
         }
 
-        $_SESSION['mensaje'] = "Perfil actualizado correctamente";
+        // Actualizar usuario
+        if (!empty($password)) {
+            // Si el usuario quiere actualizar la contraseña
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, contrasena = ? WHERE id = ?");
+            $stmt->bind_param("ssssi", $nombre, $apellido, $email, $password_hash, $_SESSION['user_id']);
+        } else {
+            // Si no se actualiza la contraseña
+            $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, apellido = ?, email = ? WHERE id = ?");
+            $stmt->bind_param("sssi", $nombre, $apellido, $email, $_SESSION['user_id']);
+        }
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            $_SESSION['mensaje'] = "Perfil actualizado correctamente.";
+        } else {
+            $_SESSION['mensaje'] = "Error al actualizar el perfil.";
+        }
+
         header('Location: perfilAdmin.php');
         exit;
     }
-} catch(PDOException $e) {
-    die("Error: " . $e->getMessage());
+} catch (Exception $e) {
+    // Manejo de errores
+    $_SESSION['mensaje'] = "Error en el sistema: " . htmlspecialchars($e->getMessage());
+    header('Location: index.php');
+    exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
